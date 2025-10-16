@@ -102,18 +102,19 @@ cd c:\Users\vijay\OneDrive\Desktop\projects\expensetracker
 # Navigate to backend folder
 cd backend
 
-# Install dependencies (already done)
+# Install dependencies
 npm install
 
-# The .env file is already configured with:
-# PORT=5000
-# MONGODB_URI=mongodb://localhost:27017/expensetracker
-# JWT_SECRET=your_jwt_secret_key_change_this_in_production
+# Setup environment variables
+# Copy .env.example to .env
+copy .env.example .env
 
-# IMPORTANT: Change JWT_SECRET to a secure random string in production!
+# Edit .env file and configure:
+# - MONGODB_URI: Your MongoDB connection string
+# - JWT_SECRET: A secure random string (change in production!)
+# - PORT: Server port (default: 5000)
 
-# If using MongoDB Atlas, update the MONGODB_URI in .env file:
-# MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/expensetracker
+# See ENV_SETUP.md for detailed configuration guide
 ```
 
 ### 3. Frontend Setup
@@ -122,9 +123,31 @@ npm install
 # Navigate to frontend folder
 cd ..\frontend
 
-# Install dependencies (already done)
+# Install dependencies
 npm install
+
+# Setup environment variables
+# Copy .env.example to .env
+copy .env.example .env
+
+# Edit .env file and set:
+# - REACT_APP_API_URL: Your backend API URL
+#   Local: http://localhost:5000
+#   Production: https://your-backend.onrender.com/
+
+# See ENV_SETUP.md for detailed configuration guide
 ```
+
+### 4. Environment Configuration
+
+**Important:** All sensitive data is stored in `.env` files.
+
+📖 **See [ENV_SETUP.md](ENV_SETUP.md) for complete environment setup guide**
+
+Quick setup:
+- Backend: Configure MongoDB URI and JWT secret
+- Frontend: Configure API endpoint URL
+- Never commit `.env` files to git
 
 ## Running the Application
 

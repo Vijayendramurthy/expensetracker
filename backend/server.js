@@ -6,7 +6,11 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allow all origins (you can restrict this later)
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // MongoDB Connection
@@ -16,6 +20,11 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.log('MongoDB connection error:', err));
+
+// Health check route
+app.get('/', (req, res) => {
+  res.json({ message: 'Expense Tracker API is running!', status: 'OK' });
+});
 
 // Routes
 const authRoutes = require('./routes/auth');
